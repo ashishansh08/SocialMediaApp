@@ -18,6 +18,7 @@ import com.example.socialmediademo.models.Users
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import androidx.navigation.findNavController
+import com.example.socialmediademo.AppConstants
 import com.example.socialmediademo.R
 
 class UserFragment: DaggerFragment(), UserAdapter.OnUserItemClick{
@@ -40,11 +41,11 @@ class UserFragment: DaggerFragment(), UserAdapter.OnUserItemClick{
         return mView
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("Try:", mName)
-        mViewModel = ViewModelProviders.of(this, mViewModelProviderFactory).get<UserViewModel>(
-            UserViewModel::class.java)
+        mViewModel = ViewModelProviders.of(this, mViewModelProviderFactory).get<UserViewModel>(UserViewModel::class.java)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -53,14 +54,15 @@ class UserFragment: DaggerFragment(), UserAdapter.OnUserItemClick{
         mViewModel?.getUsers(1,5)
     }
 
-
+    //OnClick of list item, this interface will be fired.
     override fun onUserItemClicked(pos: Int) {
         mUsersList.let {
-            val bundle= bundleOf("key" to it!![pos])
+            val bundle= bundleOf(AppConstants.KEY to it!![pos])
             mView?.findNavController()?.navigate(R.id.action_navigation_dashboard_to_navigation_notifications,bundle)
         }
     }
 
+    //set observor which will keep observing for data.
     private fun initObserver() {
         mViewModel?.mutableList?.observe(requireActivity() , Observer { it ->
             if (it.isNullOrEmpty().not()) {
@@ -70,6 +72,7 @@ class UserFragment: DaggerFragment(), UserAdapter.OnUserItemClick{
         })
     }
 
+    //Set adapter to recyclerview
     private fun setUsersAdapter(userList: ArrayList<Users>) {
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         val mRecyclerViewUsers = mView?.findViewById(R.id.recyclerViewUsers) as androidx.recyclerview.widget.RecyclerView

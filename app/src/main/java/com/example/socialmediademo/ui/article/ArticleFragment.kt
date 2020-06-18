@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -32,7 +31,7 @@ class ArticleFragment : DaggerFragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (mView == null) {
-            mView = inflater.inflate(R.layout.fragment_home, container, false)
+            mView = inflater.inflate(R.layout.fragment_articles, container, false)
         }
         return mView
     }
@@ -49,6 +48,7 @@ class ArticleFragment : DaggerFragment(){
         mViewModel?.getArticle(1,1) //API side issue, always coming same result even after changing page and limit.
     }
 
+    //set observor which will keep observing for data.
     private fun initObserver() {
         mViewModel?.mutableList?.observe(requireActivity() , Observer { it ->
             if (it.isNullOrEmpty().not()) {
@@ -57,6 +57,7 @@ class ArticleFragment : DaggerFragment(){
         })
     }
 
+    //Set user data to adapter and recyclerview.
     private fun setArticleAdapter(articleList: ArrayList<Articles>) {
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         val mRecyclerViewArticle = mView?.findViewById(R.id.recyclerViewArticles) as androidx.recyclerview.widget.RecyclerView
