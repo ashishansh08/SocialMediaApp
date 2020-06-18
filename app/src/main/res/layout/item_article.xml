@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/dimen_16dp"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageViewArticleProfilePic"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_launcher_background"
+        app:civ_border_width="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:civ_border_color="#FF000000"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewArticleProfilePic"
+        app:layout_constraintTop_toTopOf="@+id/imageViewArticleProfilePic"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewArticleProfilePic"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewArticleUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        tools:text="User name"
+        android:layout_marginStart="8dp"
+        android:textSize="@dimen/dimen_textsize_16sp"  />
+
+    <TextView
+        android:id="@+id/textViewArticleDesignation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        tools:text="name"
+        android:layout_marginStart="8dp"
+        android:textSize="@dimen/dimen_textsize_14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="1 min"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/dimen_textsize_10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imageViewArticleProfilePic"/>
+
+    <ImageView
+        android:id="@+id/imageViewArticleImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_150dp"
+        android:layout_marginTop="@dimen/dimen_12dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@id/imageViewArticleProfilePic"
+        android:src="@drawable/ic_launcher_background"/>
+
+    <TextView
+        android:id="@+id/textViewArticleComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="bjsdjfsfvsf sjvsjvfsvfs sjjs saj sjjs j sacjascj asvcj sa casjvcjsvj asasjc sac ascjsjcjsc jscsjvcsvcjas  "
+        android:layout_marginTop="@dimen/dimen_12dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/dimen_textsize_14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewArticleImage"/>
+
+
+    <TextView
+        android:id="@+id/textViewArticleTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_12dp"
+        android:textSize="@dimen/dimen_textsize_14sp"
+        android:textColor="@color/colorBlack"
+        tools:text="Article Title"
+        app:layout_constraintTop_toBottomOf="@+id/textViewArticleComment"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textViewArticleUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:textSize="@dimen/dimen_textsize_14sp"
+        tools:text="4Article Url"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintTop_toBottomOf="@+id/textViewArticleTitle"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textViewArticleLikesCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        tools:text="4.5 Likes"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintTop_toBottomOf="@+id/textViewArticleUrl"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewArticleCommentCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintTop_toTopOf="@+id/textViewArticleLikesCount"
+        android:textStyle="bold"
+        android:text="300K comments"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

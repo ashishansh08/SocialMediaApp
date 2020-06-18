@@ -1,4 +1,4 @@
-package com.example.socialmediademo.ui.home
+package com.example.socialmediademo.ui.article
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
@@ -10,13 +10,13 @@ import io.reactivex.schedulers.Schedulers
 import java.net.UnknownHostException
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(var authRepository: ArticleRepository):ViewModel() {
+class ArticleViewModel @Inject constructor(var authRepository: ArticleRepository):ViewModel() {
 
     var mutableList : MutableLiveData<ArrayList<Articles>>? = MutableLiveData()
 
     @SuppressLint("CheckResult")
-    fun getUser(userId:Int){
-        authRepository.getArticle(userId, 10)
+    fun getArticle(page:Int, limit:Int){
+        authRepository.getArticle(page, limit)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ data ->

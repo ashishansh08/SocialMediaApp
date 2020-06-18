@@ -1,8 +1,8 @@
-package com.example.socialmediademo.di.auth
+package com.example.socialmediademo.di.article
 
 import androidx.lifecycle.ViewModel
 import com.example.socialmediademo.di.ViewModelKey
-import com.example.socialmediademo.ui.home.HomeViewModel
+import com.example.socialmediademo.ui.article.ArticleViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -12,7 +12,7 @@ import dagger.multibindings.IntoMap
 
         @Binds
         @IntoMap
-        @ViewModelKey(HomeViewModel::class)
-        abstract fun bindAuthViewModel(viewModel: HomeViewModel?): ViewModel
+        @ViewModelKey(ArticleViewModel::class)
+        abstract fun bindAuthViewModel(viewModel: ArticleViewModel?): ViewModel
 
 }

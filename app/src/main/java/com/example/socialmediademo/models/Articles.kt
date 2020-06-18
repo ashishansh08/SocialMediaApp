@@ -24,14 +24,3 @@ data class Articles (
     @SerializedName("user")
     val user: ArrayList<User>? = null
 )
-
-/*
-*
-* "id":"1",
-"createdAt":"2020-04-17T12:13:44.575Z",
-"content":"calculating the program won't do anything, we need to navigate the multi-byte SMS alarm!",
-"comments":8237,
-"likes":62648,
-"media":[
-*
-* */

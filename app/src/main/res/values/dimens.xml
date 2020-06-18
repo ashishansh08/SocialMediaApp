@@ -1,5 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="grid_marginbottom_image_overview">0dp</dimen>
+    <dimen name="textsize_smallest">8sp</dimen>
+
+    <dimen name="dimen_textsize_10sp">10sp</dimen>
+    <dimen name="dimen_textsize_12sp">12sp</dimen>
+    <dimen name="dimen_textsize_14sp">14sp</dimen>
+    <dimen name="dimen_textsize_16sp">16sp</dimen>
+
+    <dimen name="dimen_textsize_18sp">18sp</dimen>
+    <dimen name="dimen_textsize_20sp">20sp</dimen>
+    <dimen name="dimen_textsize_22sp">22sp</dimen>
+    <dimen name="dimen_textsize_24sp">24sp</dimen>
+    <dimen name="dimen_textsize_28sp">28sp</dimen>
+    <dimen name="dimen_textsize_30sp">30sp</dimen>
+    <dimen name="dimen_textsize_34sp">34sp</dimen>
+    <dimen name="dimen_textsize_50sp">50sp</dimen>
+
+    <dimen name="dimen_12dp">12dp</dimen>
+    <dimen name="dimen_16dp">16dp</dimen>
+
+    <dimen name="dimen_18dp">18dp</dimen>
+    <dimen name="dimen_14dp">14dp</dimen>
+    <dimen name="dimen_10dp">10dp</dimen>
+    <dimen name="dimen_8dp">8dp</dimen>
+    <dimen name="dimen_6dp">6dp</dimen>
+    <dimen name="dimen_4dp">4dp</dimen>
+    <dimen name="dimen_2dp">2dp</dimen>
+    <dimen name="dimen_3dp">3dp</dimen>
+    <dimen name="dimen_20dp">20dp</dimen>
+    <dimen name="dimen_80dp">80dp</dimen>
+    <dimen name="dimen_150dp">150dp</dimen>
+    <dimen name="dimen_200dp">200dp</dimen>
+    <dimen name="dimen_300dp">300dp</dimen>
+
+
+    <dimen name="dimen_40dp">40dp</dimen>
+    <dimen name="dimen_50dp">50dp</dimen>
+    <dimen name="dimen_24dp">24dp</dimen>
+
+    <dimen name="dimen_26dp">26dp</dimen>
+    <dimen name="dimen_28dp">28dp</dimen>
+    <dimen name="dimen_30dp">30dp</dimen>
+    <dimen name="dimen_36dp">36dp</dimen>
+    <dimen name="dimen_34dp">34dp</dimen>
+
+    <dimen name="recycler_padding">3dp</dimen>
+    <dimen name="dimen_32dp">32dp</dimen>
+
+    <dimen name="dimen_100dp">100dp</dimen>
+    <dimen name="dimen_350dp">350dp</dimen>
+    <dimen name="vehicle_detail_guideline_vertical">182dp</dimen>
+    <dimen name="add_memo_guideline_vertical">130dp</dimen>
+
+    <dimen name="message_login_trusted_image_height_width">60dp</dimen>
 </resources>

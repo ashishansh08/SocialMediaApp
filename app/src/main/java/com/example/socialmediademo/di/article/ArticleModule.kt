@@ -1,4 +1,4 @@
-package com.example.socialmediademo.di.auth
+package com.example.socialmediademo.di.article
 
 import com.example.socialmediademo.network.auth.ArticleApi
 import com.example.socialmediademo.repositories.ArticleRepository
@@ -7,16 +7,16 @@ import dagger.Provides
 import retrofit2.Retrofit
 
 @Module
-class MainModule {
+class ArticleModule {
 
     companion object{
-        @MainScope
+        @ArticleScope
         @Provides
         fun provideAuthApi(retrofit: Retrofit): ArticleApi {
             return retrofit.create(ArticleApi::class.java)
         }
 
-        @MainScope
+        @ArticleScope
         @Provides
         fun provideRepository(articleApi: ArticleApi): ArticleRepository {
             return ArticleRepository(articleApi)
