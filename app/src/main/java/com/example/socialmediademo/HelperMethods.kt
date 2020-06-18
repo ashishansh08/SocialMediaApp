@@ -1,5 +1,7 @@
 package com.example.socialmediademo
 
+import android.view.View
+import android.widget.TextView
 import kotlin.math.abs
 
 fun Long.convertNumber():String {
@@ -16,4 +18,16 @@ fun Long.convertNumber():String {
         }
     }
     return numberString
+}
+
+fun TextView.setProfileToTextView(data: String?, isForCount: Boolean=false, postFixString:String="") {
+    if (data.isNullOrBlank().not()) {
+        if (isForCount) {
+            this.text = data?.toLong()?.convertNumber().plus(" $postFixString")
+        }else{
+            this.text = data
+        }
+    }else{
+        this.visibility = View.GONE
+    }
 }

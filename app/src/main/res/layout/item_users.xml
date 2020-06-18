@@ -52,7 +52,7 @@
         tools:text="1 min"
         android:layout_marginStart="8dp"
         android:textColor="@color/colorBlack"
-        android:textSize="@dimen/dimen_textsize_10sp"
+        android:textSize="@dimen/dimen_textsize_12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/imageViewUserProfilePic"/>
 

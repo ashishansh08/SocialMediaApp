@@ -10,6 +10,7 @@ import com.bumptech.glide.RequestManager
 import com.example.socialmediademo.R
 import com.example.socialmediademo.models.Media
 import com.example.socialmediademo.models.Users
+import com.example.socialmediademo.setProfileToTextView
 import kotlinx.android.synthetic.main.item_users.view.*
 
 
@@ -32,6 +33,10 @@ class UserAdapter (private  val context: Context,
 
     private fun setDataToViews(holder: ViewHolder, requestManager: RequestManager, position: Int) {
         setMediaImage(mUsersList[position].avatar, requestManager, holder.imageViewUserProfilePic)
+        holder.textViewUserName.setProfileToTextView(mUsersList[position].name)
+        holder.textViewUserDesignation.setProfileToTextView(mUsersList[position].designation)
+        holder.textViewUserCity.setProfileToTextView(mUsersList[position].city)
+
     }
 
     private fun setMediaImage(mediaUrl: String?, requestManager: RequestManager, imageViewArticleImage: ImageView) {
@@ -46,6 +51,7 @@ class UserAdapter (private  val context: Context,
         val imageViewUserProfilePic = view.imageViewUserProfilePic
         val textViewUserName = view.textViewUserName
         val textViewUserDesignation = view.textViewUserDesignation
+        val textViewUserCity = view.textViewUserCity
     }
 
     interface OnUserItemClick{
