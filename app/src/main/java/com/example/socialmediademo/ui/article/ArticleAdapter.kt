@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_article.view.*
 
 
 class ArticleAdapter (private  val context: Context,
-                      private val mList: ArrayList<Articles>,
+                      private val mArticleList: ArrayList<Articles>,
                       private val mRequestManager:RequestManager,
                       private val onArticleClick: OnArticleClick) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 
@@ -25,7 +25,7 @@ class ArticleAdapter (private  val context: Context,
     }
 
     override fun getItemCount(): Int {
-        return mList.size
+        return mArticleList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -33,8 +33,8 @@ class ArticleAdapter (private  val context: Context,
     }
 
     private fun setDataToViews(holder: ViewHolder, requestManager: RequestManager, position: Int) {
-        val userData = mList[position].user
-        val mediaData = mList[position].media
+        val userData = mArticleList[position].user
+        val mediaData = mArticleList[position].media
 
         if (mediaData.isNullOrEmpty().not()) {
             setMediaImage(mediaData, requestManager, holder.imageViewArticleImage)
@@ -51,9 +51,9 @@ class ArticleAdapter (private  val context: Context,
             }
         }
 
-        setDataToTextView(mList[position].content, holder.textViewArticleComment)
-        setDataToTextView(mList[position].likes, holder.textViewArticleLikesCount, true, context.getString(R.string.likes))
-        setDataToTextView(mList[position].comments, holder.textViewArticleCommentCount, true, context.getString(R.string.comments))
+        setDataToTextView(mArticleList[position].content, holder.textViewArticleComment)
+        setDataToTextView(mArticleList[position].likes, holder.textViewArticleLikesCount, true, context.getString(R.string.likes))
+        setDataToTextView(mArticleList[position].comments, holder.textViewArticleCommentCount, true, context.getString(R.string.comments))
     }
 
 
@@ -94,6 +94,5 @@ class ArticleAdapter (private  val context: Context,
     interface OnArticleClick{
         fun onArticleItemClicked(languageKey:String, languageValue:String)
     }
-
 }
 

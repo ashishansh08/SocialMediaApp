@@ -15,8 +15,8 @@ class ArticleViewModel @Inject constructor(var authRepository: ArticleRepository
     var mutableList : MutableLiveData<ArrayList<Articles>>? = MutableLiveData()
 
     @SuppressLint("CheckResult")
-    fun getUser(userId:Int){
-        authRepository.getArticle(userId, 10)
+    fun getArticle(page:Int, limit:Int){
+        authRepository.getArticle(page, limit)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ data ->

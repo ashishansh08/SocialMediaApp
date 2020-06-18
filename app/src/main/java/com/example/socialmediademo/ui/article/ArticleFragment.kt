@@ -46,9 +46,12 @@ class ArticleFragment : DaggerFragment(), ArticleAdapter.OnArticleClick{
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initObserver()
-        mViewModel?.getUser(2)
+        mViewModel?.getArticle(1,1) //API side issue, always coming same result even after changing page and limit.
     }
 
+    override fun onArticleItemClicked(languageKey: String, languageValue: String) {
+        //DO nothing for now
+    }
 
     private fun initObserver() {
         mViewModel?.mutableList?.observe(requireActivity() , Observer { it ->
@@ -65,9 +68,5 @@ class ArticleFragment : DaggerFragment(), ArticleAdapter.OnArticleClick{
         mRecyclerViewArticle.addItemDecoration(DividerItemDecoration(this.activity, LinearLayout.VERTICAL))
         mRecyclerViewArticle.layoutManager = layoutManager
         mRecyclerViewArticle.adapter = ArticleAdapter(requireActivity(), articleList, mRequestManager, this)
-    }
-
-    override fun onArticleItemClicked(languageKey: String, languageValue: String) {
-        //DO nothing for now
     }
 }
