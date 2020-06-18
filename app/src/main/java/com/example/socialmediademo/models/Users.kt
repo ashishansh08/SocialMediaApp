@@ -1,8 +1,10 @@
 package com.example.socialmediademo.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-
+@Parcelize
 data class Users (
 
     @SerializedName("id")
@@ -29,4 +31,4 @@ data class Users (
     @SerializedName("about")
     val about: String? = null
 
-)
+):Parcelable

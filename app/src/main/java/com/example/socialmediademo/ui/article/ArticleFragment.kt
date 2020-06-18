@@ -51,7 +51,6 @@ class ArticleFragment : DaggerFragment(){
 
     private fun initObserver() {
         mViewModel?.mutableList?.observe(requireActivity() , Observer { it ->
-            Toast.makeText(requireActivity(), "RESPONSE : LIST SIZE : "+ it?.size.toString(), Toast.LENGTH_LONG).show()
             if (it.isNullOrEmpty().not()) {
                 setArticleAdapter(it)
             }

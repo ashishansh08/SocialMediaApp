@@ -15,11 +15,18 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.socialmediademo.ui.users.UserFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_users" />
+        tools:layout="@layout/fragment_users" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_notifications"
+            app:destination="@id/navigation_notifications" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.socialmediademo.ui.notifications.NotificationsFragment"
+        android:name="com.example.socialmediademo.ui.user_details.UserDetailsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_user_details">
+        <argument android:name="name"
+            app:argType="com.example.socialmediademo.models.Users"/>
+    </fragment>
 </navigation>

@@ -4,15 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.example.socialmediademo.R
-import com.example.socialmediademo.models.Media
 import com.example.socialmediademo.models.Users
-import com.example.socialmediademo.setProfileToTextView
+import com.example.socialmediademo.setMediaImage
+import com.example.socialmediademo.setDataToTextView
 import kotlinx.android.synthetic.main.item_users.view.*
-
 
 class UserAdapter (private  val context: Context,
                    private val mUsersList: ArrayList<Users>,
@@ -29,22 +27,16 @@ class UserAdapter (private  val context: Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         setDataToViews(holder, mRequestManager, position)
+        holder.layoutUserMain.setOnClickListener {
+            mOnUserItemClick.onUserItemClicked(position)
+        }
     }
 
     private fun setDataToViews(holder: ViewHolder, requestManager: RequestManager, position: Int) {
-        setMediaImage(mUsersList[position].avatar, requestManager, holder.imageViewUserProfilePic)
-        holder.textViewUserName.setProfileToTextView(mUsersList[position].name)
-        holder.textViewUserDesignation.setProfileToTextView(mUsersList[position].designation)
-        holder.textViewUserCity.setProfileToTextView(mUsersList[position].city)
-
-    }
-
-    private fun setMediaImage(mediaUrl: String?, requestManager: RequestManager, imageViewArticleImage: ImageView) {
-        if (mediaUrl.isNullOrBlank().not()) {
-            requestManager.load(mediaUrl).into(imageViewArticleImage)
-        } else {
-            imageViewArticleImage.visibility = View.GONE
-        }
+        holder.imageViewUserProfilePic.setMediaImage(mUsersList[position].avatar, requestManager)
+        holder.textViewUserName.setDataToTextView(mUsersList[position].name)
+        holder.textViewUserDesignation.setDataToTextView(mUsersList[position].designation)
+        holder.textViewUserCity.setDataToTextView(mUsersList[position].city)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -52,10 +44,11 @@ class UserAdapter (private  val context: Context,
         val textViewUserName = view.textViewUserName
         val textViewUserDesignation = view.textViewUserDesignation
         val textViewUserCity = view.textViewUserCity
+        val layoutUserMain = view.layoutUserMain
     }
 
     interface OnUserItemClick{
-        fun onUserItemClicked(languageKey:String, languageValue:String)
+        fun onUserItemClicked(position: Int)
     }
 }
 
