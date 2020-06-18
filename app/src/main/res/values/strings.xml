@@ -5,4 +5,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="likes">Likes</string>
     <string name="comments">Comments</string>
+    <string name="article">Articles</string>
+    <string name="user">User</string>
+
 </resources>

@@ -12,7 +12,7 @@ class ArticleModule {
     companion object{
         @ArticleScope
         @Provides
-        fun provideAuthApi(retrofit: Retrofit): ArticleApi {
+        fun provideArticleApi(retrofit: Retrofit): ArticleApi {
             return retrofit.create(ArticleApi::class.java)
         }
 
