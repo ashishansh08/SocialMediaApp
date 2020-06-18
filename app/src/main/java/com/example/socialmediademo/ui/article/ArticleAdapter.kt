@@ -17,8 +17,7 @@ import kotlinx.android.synthetic.main.item_article.view.*
 
 class ArticleAdapter (private  val context: Context,
                       private val mArticleList: ArrayList<Articles>,
-                      private val mRequestManager:RequestManager,
-                      private val onArticleClick: OnArticleClick) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
+                      private val mRequestManager:RequestManager) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_article, parent, false))
@@ -89,10 +88,6 @@ class ArticleAdapter (private  val context: Context,
         val textViewArticleTitle=view.textViewArticleTitle
         val textViewArticleLikesCount=view.textViewArticleLikesCount
         val textViewArticleCommentCount=view.textViewArticleCommentCount
-    }
-
-    interface OnArticleClick{
-        fun onArticleItemClicked(languageKey:String, languageValue:String)
     }
 }
 

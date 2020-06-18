@@ -12,10 +12,8 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/ic_launcher_background"
-        app:civ_border_width="2dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:civ_border_color="#FF000000"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -110,6 +108,7 @@
         tools:text="4.5 Likes"
         android:textStyle="bold"
         android:textColor="@color/colorBlack"
+        android:textSize="@dimen/dimen_textsize_16sp"
         app:layout_constraintTop_toBottomOf="@+id/textViewArticleUrl"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -121,6 +120,7 @@
         android:textColor="@color/colorBlack"
         app:layout_constraintTop_toTopOf="@+id/textViewArticleLikesCount"
         android:textStyle="bold"
+        android:textSize="@dimen/dimen_textsize_16sp"
         android:text="300K comments"
         />
 

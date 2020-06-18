@@ -1,4 +1,4 @@
-package com.example.socialmediademo.ui.article
+package com.example.socialmediademo.ui.users
 
 import android.os.Bundle
 import android.util.Log
@@ -6,18 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.RequestManager
-import com.example.socialmediademo.R
 import com.example.socialmediademo.ViewModelProviderFactory
-import com.example.socialmediademo.models.Articles
+import com.example.socialmediademo.models.Users
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
+import androidx.navigation.findNavController
+import com.example.socialmediademo.AppConstants
+import com.example.socialmediademo.R
 
-class ArticleFragment : DaggerFragment(){
+class UserFragment: DaggerFragment(), UserAdapter.OnUserItemClick{
 
     @Inject
     lateinit var mViewModelProviderFactory: ViewModelProviderFactory
@@ -27,42 +31,53 @@ class ArticleFragment : DaggerFragment(){
     lateinit var mRequestManager: RequestManager
 
     private var mView: View? = null
-    private var mViewModel: ArticleViewModel? = null
+    private var mViewModel: UserViewModel? = null
+    private var mUsersList : ArrayList<Users>? = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (mView == null) {
-            mView = inflater.inflate(R.layout.fragment_articles, container, false)
+            mView = inflater.inflate(R.layout.fragment_users, container, false)
         }
         return mView
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("Try:", mName)
-        mViewModel = ViewModelProviders.of(this, mViewModelProviderFactory).get<ArticleViewModel>(ArticleViewModel::class.java)
+        mViewModel = ViewModelProviders.of(this, mViewModelProviderFactory).get<UserViewModel>(UserViewModel::class.java)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initObserver()
-        mViewModel?.getArticle(1,1) //API side issue, always coming same result even after changing page and limit.
+        mViewModel?.getUsers(1,5)
+    }
+
+    //OnClick of list item, this interface will be fired.
+    override fun onUserItemClicked(pos: Int) {
+        mUsersList.let {
+            val bundle= bundleOf(AppConstants.KEY to it!![pos])
+            mView?.findNavController()?.navigate(R.id.action_navigation_dashboard_to_navigation_notifications,bundle)
+        }
     }
 
     //set observor which will keep observing for data.
     private fun initObserver() {
         mViewModel?.mutableList?.observe(requireActivity() , Observer { it ->
             if (it.isNullOrEmpty().not()) {
-                setArticleAdapter(it)
+                mUsersList?.addAll(it)
+                setUsersAdapter(it)
             }
         })
     }
 
-    //Set user data to adapter and recyclerview.
-    private fun setArticleAdapter(articleList: ArrayList<Articles>) {
+    //Set adapter to recyclerview
+    private fun setUsersAdapter(userList: ArrayList<Users>) {
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        val mRecyclerViewArticle = mView?.findViewById(R.id.recyclerViewArticles) as androidx.recyclerview.widget.RecyclerView
-        mRecyclerViewArticle.addItemDecoration(DividerItemDecoration(this.activity, LinearLayout.VERTICAL))
-        mRecyclerViewArticle.layoutManager = layoutManager
-        mRecyclerViewArticle.adapter = ArticleAdapter(requireActivity(), articleList, mRequestManager)
+        val mRecyclerViewUsers = mView?.findViewById(R.id.recyclerViewUsers) as androidx.recyclerview.widget.RecyclerView
+        mRecyclerViewUsers.addItemDecoration(DividerItemDecoration(this.activity, LinearLayout.VERTICAL))
+        mRecyclerViewUsers.layoutManager = layoutManager
+        mRecyclerViewUsers.adapter = UserAdapter(requireActivity(), userList, mRequestManager, this)
     }
 }

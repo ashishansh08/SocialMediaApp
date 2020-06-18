@@ -8,9 +8,7 @@ import javax.inject.Inject
 open class ArticleRepository @Inject constructor(var articleApi: ArticleApi): ArticleApi {
 
     override fun getArticle(id: Int, limit: Int): Single<ArrayList<Articles>> {
-        return articleApi.getArticle(id, 10)
+        return articleApi.getArticle(id, limit)
     }
-
-
 
 }
