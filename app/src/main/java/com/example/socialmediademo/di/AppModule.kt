@@ -17,7 +17,6 @@ import javax.inject.Singleton
 class AppModule {
 
     companion object {
-
         @Singleton
         @Provides
         fun provideName(): String {

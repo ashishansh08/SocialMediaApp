@@ -1,4 +1,4 @@
-package com.example.socialmediademo.ui.home
+package com.example.socialmediademo.ui.article
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 import java.net.UnknownHostException
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(var authRepository: ArticleRepository):ViewModel() {
+class ArticleViewModel @Inject constructor(var authRepository: ArticleRepository):ViewModel() {
 
     var mutableList : MutableLiveData<ArrayList<Articles>>? = MutableLiveData()
 

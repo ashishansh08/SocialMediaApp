@@ -1,4 +1,4 @@
-package com.example.socialmediademo.di.auth
+package com.example.socialmediademo.di.article
 
 import java.lang.annotation.Documented
 import java.lang.annotation.Retention
@@ -8,6 +8,6 @@ import javax.inject.Scope
     @Scope
     @Documented
     @Retention(RetentionPolicy.RUNTIME)
-    annotation class MainScope{
+    annotation class ArticleScope{
 
     }
