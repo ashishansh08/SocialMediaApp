@@ -28,7 +28,6 @@ import com.example.socialmediademo.common.listener.OnLoadMoreListener
 import com.example.socialmediademo.common.listener.OnListItemClickListener
 import com.example.socialmediademo.db.UserDao
 import com.example.socialmediademo.ui.BaseFragment
-import kotlinx.android.synthetic.main.fragment_users.*
 
 class UserFragment: BaseFragment(), OnListItemClickListener, OnLoadMoreListener {
 
@@ -47,7 +46,7 @@ class UserFragment: BaseFragment(), OnListItemClickListener, OnLoadMoreListener 
     private var mUserAdapter: UserAdapter? = null
     private lateinit var mLinearLayoutManager: LinearLayoutManager
     private var mPageIndexCount = 1
-    private var isFirstTime=true
+    private var mIsFirstTime=true
     var networkReceiver:NetworkReceiver= NetworkReceiver()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -61,7 +60,7 @@ class UserFragment: BaseFragment(), OnListItemClickListener, OnLoadMoreListener 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        isFirstTime = true
+        mIsFirstTime = true
         Log.d("Try the injected value:", mName)
         getUsersFromApi()
     }
@@ -93,10 +92,10 @@ class UserFragment: BaseFragment(), OnListItemClickListener, OnLoadMoreListener 
     }
 
     override fun isInternetChanged() {
-        if (!isFirstTime) {
+        if (!mIsFirstTime) {
             showAlertDialog()
         }
-        isFirstTime=false
+        mIsFirstTime=false
     }
 
     private fun showAlertDialog() {

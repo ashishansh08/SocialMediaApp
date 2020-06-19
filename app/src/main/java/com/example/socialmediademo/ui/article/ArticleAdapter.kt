@@ -42,7 +42,7 @@ class ArticleAdapter (private  val mContext: Context,
         }
 
         if (position == mArticleList.size-1) {
-            mOnLoadMoreListener.onLoadMore(position)
+            mOnLoadMoreListener.onLoadMore(mArticleList.size)
         }
     }
 

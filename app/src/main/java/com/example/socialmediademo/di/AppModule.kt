@@ -7,6 +7,7 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.example.socialmediademo.common.AppConstants
 import com.example.socialmediademo.R
+import com.example.socialmediademo.db.ArticleDao
 import com.example.socialmediademo.db.UserDao
 import com.example.socialmediademo.db.UserDataBase
 import dagger.Module
@@ -59,5 +60,11 @@ class AppModule {
         @Singleton
         @Provides
         fun provideVehicleDao(basDatabase: UserDataBase): UserDao = basDatabase.getUserDao()
+
+        @Singleton
+        @Provides
+        fun provideUserDao(basDatabase: UserDataBase): ArticleDao = basDatabase.getArticleDao()
     }
+
+
 }
