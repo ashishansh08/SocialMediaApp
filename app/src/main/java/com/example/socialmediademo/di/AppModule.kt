@@ -4,7 +4,7 @@ import android.app.Application
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
-import com.example.socialmediademo.AppConstants
+import com.example.socialmediademo.common.AppConstants
 import com.example.socialmediademo.R
 import dagger.Module
 import dagger.Provides

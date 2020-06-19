@@ -1,31 +1,30 @@
 package com.example.socialmediademo.ui.users
 
 import android.os.Bundle
-import android.provider.SyncStateContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.RequestManager
-import com.example.socialmediademo.ViewModelProviderFactory
+import com.example.socialmediademo.common.ViewModelProviderFactory
 import com.example.socialmediademo.models.Users
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.example.socialmediademo.AppConstants
+import com.example.socialmediademo.common.AppConstants
 import com.example.socialmediademo.R
+import com.example.socialmediademo.common.isInternetAvailable
+import com.example.socialmediademo.common.listener.OnLoadMoreListener
+import com.example.socialmediademo.common.listener.OnListItemClickListener
 import kotlinx.android.synthetic.main.fragment_users.*
 
-class UserFragment: DaggerFragment(), UserAdapter.OnUserItemClick, UserAdapter.OnLoadMoreListener {
+class UserFragment: DaggerFragment(), OnListItemClickListener, OnLoadMoreListener {
 
     @Inject
     lateinit var mViewModelProviderFactory: ViewModelProviderFactory
@@ -79,7 +78,7 @@ class UserFragment: DaggerFragment(), UserAdapter.OnUserItemClick, UserAdapter.O
         }
     }
 
-    //set observor which will keep observing for data.
+    //set observer which will keep observing for data.
     private fun initObserver() {
         mViewModel?.mutableList?.observe(requireActivity(), Observer { it ->
             if (it.isNullOrEmpty().not()) {
@@ -106,7 +105,13 @@ class UserFragment: DaggerFragment(), UserAdapter.OnUserItemClick, UserAdapter.O
 
     //Call API for user data.
     private fun getUsersFromApi(){
-        mPageIndexCount++
-        mViewModel?.getUsers(mPageIndexCount, AppConstants.LIMIT)
+        if (isInternetAvailable(requireActivity())) {
+            mPageIndexCount++
+            mViewModel?.getUsers(mPageIndexCount, AppConstants.LIMIT)
+        }else{
+            if (mUsersList.isNullOrEmpty()){
+                //get data from db
+            }
+        }
     }
 }

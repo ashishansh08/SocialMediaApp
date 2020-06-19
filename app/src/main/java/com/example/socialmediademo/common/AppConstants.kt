@@ -1,4 +1,4 @@
-package com.example.socialmediademo
+package com.example.socialmediademo.common
 
 class AppConstants {
     companion object {

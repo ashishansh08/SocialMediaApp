@@ -1,7 +1,7 @@
 package com.example.socialmediademo.di
 
 import androidx.lifecycle.ViewModelProvider
-import com.example.socialmediademo.ViewModelProviderFactory
+import com.example.socialmediademo.common.ViewModelProviderFactory
 import dagger.Binds
 import dagger.Module
 

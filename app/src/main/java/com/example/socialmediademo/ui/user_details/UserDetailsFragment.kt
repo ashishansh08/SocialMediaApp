@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
-import com.example.socialmediademo.AppConstants
+import com.example.socialmediademo.common.AppConstants
 import com.example.socialmediademo.R
 import com.example.socialmediademo.models.Users
-import com.example.socialmediademo.setMediaImage
+import com.example.socialmediademo.common.setMediaImage
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_user_details.*
 import javax.inject.Inject
