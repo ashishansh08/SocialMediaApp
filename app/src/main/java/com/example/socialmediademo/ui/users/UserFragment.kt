@@ -1,6 +1,5 @@
 package com.example.socialmediademo.ui .users
 
-import android.content.DialogInterface
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -10,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -20,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.RequestManager
 import com.example.socialmediademo.common.ViewModelProviderFactory
 import com.example.socialmediademo.models.Users
-import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -158,7 +155,6 @@ class UserFragment: BaseFragment(), OnListItemClickListener, OnLoadMoreListener 
     * */
     private fun getUsersFromApi(){
         if (isInternetAvailable(requireActivity())) {
-           // mPageIndexCount++
             if(mUsersList.isNullOrEmpty().not()) {
                 mPageIndexCount = (mUsersList?.size!! / AppConstants.LIMIT)+1
             }
