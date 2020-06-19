@@ -13,9 +13,10 @@ import com.example.socialmediademo.setDataToTextView
 import kotlinx.android.synthetic.main.item_users.view.*
 
 class UserAdapter (private  val context: Context,
-                   private val mUsersList: ArrayList<Users>,
+                   private var mUsersList: ArrayList<Users>,
                    private val mRequestManager:RequestManager,
-                   private val mOnUserItemClick: OnUserItemClick) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+                   private val mOnUserItemClick: OnUserItemClick,
+                   private val mOnLoadMoreListener: OnLoadMoreListener) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_users, parent, false))
@@ -29,6 +30,10 @@ class UserAdapter (private  val context: Context,
         setDataToViews(holder, mRequestManager, position)
         holder.layoutUserMain.setOnClickListener {
             mOnUserItemClick.onUserItemClicked(position)
+        }
+
+        if (position == mUsersList.size-1) {
+            mOnLoadMoreListener.onLoadMore(position)
         }
     }
 
@@ -47,8 +52,18 @@ class UserAdapter (private  val context: Context,
         val layoutUserMain = view.layoutUserMain
     }
 
+    fun updateList(userList: ArrayList<Users>) {
+        mUsersList = userList
+        notifyDataSetChanged()
+    }
+
     interface OnUserItemClick{
         fun onUserItemClicked(position: Int)
     }
+
+    interface OnLoadMoreListener {
+        fun onLoadMore(position: Int)
+    }
+
 }
 
