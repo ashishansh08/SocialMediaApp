@@ -1,5 +1,6 @@
 package com.example.socialmediademo.di.user
 
+import com.example.socialmediademo.db.UserDao
 import com.example.socialmediademo.di.MainScope
 import com.example.socialmediademo.network.user.UserApi
 import com.example.socialmediademo.repositories.UserRepository
@@ -19,8 +20,8 @@ class UserModule {
 
         @MainScope
         @Provides
-        fun provideRepository(userApi: UserApi): UserRepository {
-            return UserRepository(userApi)
+        fun provideRepository(userApi: UserApi, UserDao:UserDao): UserRepository {
+            return UserRepository(userApi, UserDao)
         }
     }
 }

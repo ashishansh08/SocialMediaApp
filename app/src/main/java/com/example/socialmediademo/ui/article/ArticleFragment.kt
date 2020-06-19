@@ -20,6 +20,7 @@ import com.example.socialmediademo.common.isInternetAvailable
 import com.example.socialmediademo.common.listener.OnListItemClickListener
 import com.example.socialmediademo.common.listener.OnLoadMoreListener
 import com.example.socialmediademo.models.Articles
+import com.example.socialmediademo.models.Users
 import com.example.socialmediademo.ui.users.UserAdapter
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_articles.*
@@ -88,7 +89,8 @@ class ArticleFragment : DaggerFragment(), OnListItemClickListener, OnLoadMoreLis
             mViewModel?.getArticle(mPageIndexCount, AppConstants.LIMIT)
         }else{
             if (mArticleList.isNullOrEmpty()){
-                //get data from db
+//                mArticleList = mViewModel?.getUsersFromDb() as ArrayList<Users>
+//                setUI()
             }
         }
     }
@@ -108,17 +110,11 @@ class ArticleFragment : DaggerFragment(), OnListItemClickListener, OnLoadMoreLis
     private fun setArticleAdapter() {
         mArticleList?.let {
             if (mArticleAdapter == null) {
-                mLinearLayoutManager =
-                    LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-                recyclerViewArticles.addItemDecoration(
-                    DividerItemDecoration(
-                        this.activity,
-                        LinearLayout.VERTICAL
-                    )
-                )
-                recyclerViewArticles.layoutManager = mLinearLayoutManager
+                mLinearLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+                recyclerViewArticles?.addItemDecoration(DividerItemDecoration(requireActivity(), LinearLayout.VERTICAL))
+                recyclerViewArticles?.layoutManager = mLinearLayoutManager
                 mArticleAdapter = ArticleAdapter(requireActivity(), it, mRequestManager, this, this)
-                recyclerViewArticles.adapter = mArticleAdapter
+                recyclerViewArticles?.adapter = mArticleAdapter
             }else{
                 mArticleAdapter?.updateList(it)
             }

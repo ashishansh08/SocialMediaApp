@@ -6,17 +6,19 @@ import androidx.lifecycle.ViewModel
 import com.example.socialmediademo.models.Articles
 import com.example.socialmediademo.repositories.ArticleRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.net.UnknownHostException
 import javax.inject.Inject
 
 class ArticleViewModel @Inject constructor(var authRepository: ArticleRepository):ViewModel() {
 
+    private var disposable: Disposable?= null
     var mutableList : MutableLiveData<ArrayList<Articles>>? = MutableLiveData()
 
     @SuppressLint("CheckResult")
     fun getArticle(page:Int, limit:Int){
-        authRepository.getArticle(page, limit)
+        disposable = authRepository.getArticle(page, limit)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ data ->
@@ -29,5 +31,14 @@ class ArticleViewModel @Inject constructor(var authRepository: ArticleRepository
                    // mutableList?.value = Articles()
                 }
             })
+    }
+
+    /**
+     * Need to dispose the subscription
+     * when view model is no more
+     */
+    override fun onCleared() {
+        super.onCleared()
+        disposable?.dispose()
     }
 }
