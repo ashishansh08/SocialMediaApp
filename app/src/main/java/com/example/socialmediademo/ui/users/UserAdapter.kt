@@ -44,8 +44,7 @@ class UserAdapter (private  val context: Context,
         holder.imageViewUserProfilePic.setMediaImage(mUsersList[position].avatar, requestManager)
         holder.textViewUserName.setDataToTextView(mUsersList[position].name)
         holder.textViewUserDesignation.setDataToTextView(mUsersList[position].designation)
-      //TODO  holder.textViewUserCity.setDataToTextView(mUsersList[position].city)
-        holder.textViewUserCity.text= mUsersList[position].id.toString()
+        holder.textViewUserCity.setDataToTextView(mUsersList[position].city)
     }
 
     fun updateList(userList: ArrayList<Users>) {

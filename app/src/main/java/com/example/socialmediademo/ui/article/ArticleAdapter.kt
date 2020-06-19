@@ -64,7 +64,6 @@ class ArticleAdapter (private  val mContext: Context,
         setDataToTextView(mArticleList[position].content, holder.textViewArticleComment)
         setDataToTextView(mArticleList[position].likes, holder.textViewArticleLikesCount, true, mContext.getString(R.string.likes))
         setDataToTextView(mArticleList[position].comments, holder.textViewArticleCommentCount, true, mContext.getString(R.string.comments))
-        holder.textViewTime.text=mArticleList[position].id.toString()
     }
 
     private fun setMediaRelatedDataToViews(mediaData: ArrayList<Media>?, holder: ViewHolder) {
