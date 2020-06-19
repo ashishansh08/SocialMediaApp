@@ -36,7 +36,7 @@ class UserAdapter (private  val context: Context,
         }
 
         if (position == mUsersList.size-1) {
-            mOnLoadMoreListener.onLoadMore(position)
+            mOnLoadMoreListener.onLoadMore(mUsersList.size)
         }
     }
 

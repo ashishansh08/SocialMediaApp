@@ -1,4 +1,4 @@
-package com.example.socialmediademo.ui.users
+package com.example.socialmediademo.ui .users
 
 import android.content.DialogInterface
 import android.content.IntentFilter
@@ -49,7 +49,7 @@ class UserFragment: BaseFragment(), OnListItemClickListener, OnLoadMoreListener 
     private var mUsersList: ArrayList<Users>? = ArrayList()
     private var mUserAdapter: UserAdapter? = null
     private lateinit var mLinearLayoutManager: LinearLayoutManager
-    private var mPageIndexCount = 0
+    private var mPageIndexCount = 1
     private var isFirstTime=true
     var networkReceiver:NetworkReceiver= NetworkReceiver()
 
@@ -66,7 +66,7 @@ class UserFragment: BaseFragment(), OnListItemClickListener, OnLoadMoreListener 
         super.onViewCreated(view, savedInstanceState)
         isFirstTime = true
         Log.d("Try the injected value:", mName)
-        clearAllDataAndSetAccordingly()
+        getUsersFromApi()
     }
 
     override fun onResume() {
@@ -81,7 +81,9 @@ class UserFragment: BaseFragment(), OnListItemClickListener, OnLoadMoreListener 
 
     //This will be called when we scrolled to some position and we want to load the next data.
     override fun onLoadMore(position: Int) {
-        getUsersFromApi()
+        if(mUsersList?.size?.rem(AppConstants.LIMIT)==0) {
+                getUsersFromApi()
+        }
     }
 
     //OnClick of list item, this interface will be fired.
@@ -105,7 +107,9 @@ class UserFragment: BaseFragment(), OnListItemClickListener, OnLoadMoreListener 
         dialogBuilder.setMessage(requireActivity().getString(R.string.internet_status_change))
             .setCancelable(false)
             .setPositiveButton(requireActivity().getString(R.string.message_ok)) { dialog, id ->
-                clearAllDataAndSetAccordingly()
+                if (isInternetAvailable(requireActivity())){
+                    getUsersFromApi()
+                }
                 dialog.dismiss()
             }
 
@@ -154,7 +158,10 @@ class UserFragment: BaseFragment(), OnListItemClickListener, OnLoadMoreListener 
     * */
     private fun getUsersFromApi(){
         if (isInternetAvailable(requireActivity())) {
-            mPageIndexCount++
+           // mPageIndexCount++
+            if(mUsersList.isNullOrEmpty().not()) {
+                mPageIndexCount = (mUsersList?.size!! / AppConstants.LIMIT)+1
+            }
             mViewModel?.getUsers(mPageIndexCount, AppConstants.LIMIT)
         }else{
             if (mUsersList.isNullOrEmpty()){
@@ -175,14 +182,5 @@ class UserFragment: BaseFragment(), OnListItemClickListener, OnLoadMoreListener 
             mView?.findViewById<TextView>(R.id.textViewUserNoRecordFound)?.visibility=View.GONE
             mView?.findViewById<RecyclerView>(R.id.recyclerViewUsers)?.visibility=View.VISIBLE
         }
-    }
-
-    //If at run time you internet changes, change the list accordingly.
-    private fun clearAllDataAndSetAccordingly() {
-        mUsersList = ArrayList()
-        mPageIndexCount=0
-        mUsersList?.let { mUserAdapter?.updateList(it) }
-        mUserAdapter=null
-        getUsersFromApi()
     }
 }
