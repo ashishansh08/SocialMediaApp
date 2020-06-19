@@ -69,6 +69,7 @@ class UserFragment: BaseFragment(), OnListItemClickListener, OnLoadMoreListener 
         super.onResume()
         val intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         requireActivity().registerReceiver(networkReceiver, intentFilter)
+        mIsFirstTime=true
     }
     override fun onPause() {
         super.onPause()
