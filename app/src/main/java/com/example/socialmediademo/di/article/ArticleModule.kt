@@ -1,5 +1,6 @@
 package com.example.socialmediademo.di.article
 
+import com.example.socialmediademo.db.ArticleDao
 import com.example.socialmediademo.di.MainScope
 import com.example.socialmediademo.network.auth.ArticleApi
 import com.example.socialmediademo.repositories.ArticleRepository
@@ -19,8 +20,8 @@ class ArticleModule {
 
         @MainScope
         @Provides
-        fun provideRepository(articleApi: ArticleApi): ArticleRepository {
-            return ArticleRepository(articleApi)
+        fun provideRepository(articleApi: ArticleApi, articleDao: ArticleDao): ArticleRepository {
+            return ArticleRepository(articleApi, articleDao)
         }
     }
 

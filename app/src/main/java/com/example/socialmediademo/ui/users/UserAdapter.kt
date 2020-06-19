@@ -32,7 +32,7 @@ class UserAdapter (private  val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         setDataToViews(holder, mRequestManager, position)
         holder.layoutUserMain.setOnClickListener {
-            mOnListItemClickListener.onUserItemClicked(position)
+            mOnListItemClickListener.onItemClicked(position)
         }
 
         if (position == mUsersList.size-1) {

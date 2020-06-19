@@ -38,11 +38,11 @@ class ArticleAdapter (private  val mContext: Context,
 
     private fun setListeners(holder: ViewHolder, position: Int) {
         holder.layoutArticleMain.setOnClickListener {
-            mOnListItemClickListener.onUserItemClicked(position)
+            mOnListItemClickListener.onItemClicked(position)
         }
 
         if (position == mArticleList.size-1) {
-            mOnLoadMoreListener.onLoadMore(position)
+            mOnLoadMoreListener.onLoadMore(mArticleList.size)
         }
     }
 
