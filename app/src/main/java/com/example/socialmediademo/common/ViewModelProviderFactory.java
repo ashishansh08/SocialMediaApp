@@ -1,4 +1,4 @@
-package com.example.socialmediademo;
+package com.example.socialmediademo.common;
 
 
 import androidx.lifecycle.ViewModel;

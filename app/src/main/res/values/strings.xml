@@ -10,5 +10,8 @@
     <string name="user_profile">User Profile</string>
     <string name="profile">Profile</string>
     <string name="articles">Articles</string>
+    <string name="no_data_found">No data found</string>
+    <string name="internet_status_change">Internet status change, you will see data from from server if internet available else old cached data.</string>
+    <string name="message_ok">Ok</string>
 
 </resources>

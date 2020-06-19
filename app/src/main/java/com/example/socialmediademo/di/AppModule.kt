@@ -1,11 +1,14 @@
 package com.example.socialmediademo.di
 
 import android.app.Application
+import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
-import com.example.socialmediademo.AppConstants
+import com.example.socialmediademo.common.AppConstants
 import com.example.socialmediademo.R
+import com.example.socialmediademo.db.UserDao
+import com.example.socialmediademo.db.UserDataBase
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -48,5 +51,13 @@ class AppModule {
                 .setDefaultRequestOptions(requestOptions)
         }
 
+
+        @Singleton
+        @Provides
+        fun providesAppDatabase(context: Application): UserDataBase = Room.databaseBuilder(context, UserDataBase::class.java, "user_db").allowMainThreadQueries().build()
+
+        @Singleton
+        @Provides
+        fun provideVehicleDao(basDatabase: UserDataBase): UserDao = basDatabase.getUserDao()
     }
 }

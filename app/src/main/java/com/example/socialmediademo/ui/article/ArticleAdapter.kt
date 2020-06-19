@@ -4,23 +4,27 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.example.socialmediademo.R
-import com.example.socialmediademo.convertNumber
+import com.example.socialmediademo.common.convertNumber
+import com.example.socialmediademo.common.listener.OnListItemClickListener
+import com.example.socialmediademo.common.listener.OnLoadMoreListener
 import com.example.socialmediademo.models.Articles
 import com.example.socialmediademo.models.Media
 import kotlinx.android.synthetic.main.item_article.view.*
 
 
-class ArticleAdapter (private  val context: Context,
-                      private val mArticleList: ArrayList<Articles>,
-                      private val mRequestManager:RequestManager) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
+class ArticleAdapter (private  val mContext: Context,
+                      private var mArticleList: ArrayList<Articles>,
+                      private val mRequestManager:RequestManager,
+                      private val mOnListItemClickListener: OnListItemClickListener,
+                      private val mOnLoadMoreListener: OnLoadMoreListener
+) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_article, parent, false))
+        return ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_article, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -29,17 +33,24 @@ class ArticleAdapter (private  val context: Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         setDataToViews(holder, mRequestManager, position)
+        setListeners(holder, position)
+    }
+
+    private fun setListeners(holder: ViewHolder, position: Int) {
+        holder.layoutArticleMain.setOnClickListener {
+            mOnListItemClickListener.onUserItemClicked(position)
+        }
+
+        if (position == mArticleList.size-1) {
+            mOnLoadMoreListener.onLoadMore(position)
+        }
     }
 
     private fun setDataToViews(holder: ViewHolder, requestManager: RequestManager, position: Int) {
         val userData = mArticleList[position].user
         val mediaData = mArticleList[position].media
 
-        if (mediaData.isNullOrEmpty().not()) {
-            setMediaImage(mediaData, requestManager, holder.imageViewArticleImage)
-            setDataToTextView(mediaData?.get(0)?.title, holder.textViewArticleTitle)
-            setDataToTextView(mediaData?.get(0)?.url, holder.textViewArticleUrl)
-        }
+        setMediaRelatedDataToViews(mediaData, holder)
 
         if(userData.isNullOrEmpty().not()){
             setDataToTextView(userData?.get(0)?.name, holder.textViewArticleUserName)
@@ -51,18 +62,28 @@ class ArticleAdapter (private  val context: Context,
         }
 
         setDataToTextView(mArticleList[position].content, holder.textViewArticleComment)
-        setDataToTextView(mArticleList[position].likes, holder.textViewArticleLikesCount, true, context.getString(R.string.likes))
-        setDataToTextView(mArticleList[position].comments, holder.textViewArticleCommentCount, true, context.getString(R.string.comments))
+        setDataToTextView(mArticleList[position].likes, holder.textViewArticleLikesCount, true, mContext.getString(R.string.likes))
+        setDataToTextView(mArticleList[position].comments, holder.textViewArticleCommentCount, true, mContext.getString(R.string.comments))
+        holder.textViewTime.text=mArticleList[position].id.toString()
     }
 
-
-
-    private fun setMediaImage(mediaData: ArrayList<Media>?, requestManager: RequestManager, imageViewArticleImage: ImageView) {
+    private fun setMediaRelatedDataToViews(mediaData: ArrayList<Media>?, holder: ViewHolder) {
         if (mediaData.isNullOrEmpty().not()) {
-            requestManager.load(mediaData?.get(0)?.image).into(imageViewArticleImage)
-        } else {
-            imageViewArticleImage.visibility = View.GONE
+            setViewVisibilty(holder, View.VISIBLE)
+            mRequestManager.load(mediaData?.get(0)?.image).into(holder.imageViewArticleImage)
+            setDataToTextView(mediaData?.get(0)?.title, holder.textViewArticleTitle)
+            setDataToTextView(mediaData?.get(0)?.url, holder.textViewArticleUrl)
+        }else{
+            holder.imageViewArticleImage.visibility=View.GONE
+            holder.textViewArticleTitle.visibility=View.GONE
+            setViewVisibilty(holder, View.GONE)
         }
+    }
+
+    private fun setViewVisibilty(holder: ViewHolder, visibility: Int) {
+        holder.imageViewArticleImage.visibility=visibility
+        holder.textViewArticleTitle.visibility=visibility
+        holder.textViewArticleUrl.visibility=visibility
     }
 
     private fun setDataToTextView(data: String?, textView: TextView, isForCount: Boolean=false, postFixString:String="") {
@@ -77,6 +98,11 @@ class ArticleAdapter (private  val context: Context,
         }
     }
 
+    fun updateList(articlesList: ArrayList<Articles>) {
+        mArticleList = articlesList
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageViewArticleProfilePic = view.imageViewArticleProfilePic
         val textViewArticleUserName = view.textViewArticleUserName
@@ -88,6 +114,7 @@ class ArticleAdapter (private  val context: Context,
         val textViewArticleTitle=view.textViewArticleTitle
         val textViewArticleLikesCount=view.textViewArticleLikesCount
         val textViewArticleCommentCount=view.textViewArticleCommentCount
+        val layoutArticleMain=view.layoutArticleMain
     }
 }
 
