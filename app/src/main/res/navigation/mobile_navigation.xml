@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.example.socialmediademo.ui.article.ArticleFragment"
         android:label="@string/articles"
-        tools:layout="@layout/fragment_articles" />
+        tools:layout="@layout/fragment_articles" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_notifications2"
+            app:destination="@id/navigation_notifications" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"

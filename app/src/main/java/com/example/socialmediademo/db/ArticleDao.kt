@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.socialmediademo.models.Articles
-import com.example.socialmediademo.models.Users
 
 @Dao
 interface ArticleDao {

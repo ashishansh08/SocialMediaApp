@@ -83,7 +83,7 @@ class UserFragment: BaseFragment(), OnListItemClickListener, OnLoadMoreListener 
     }
 
     //OnClick of list item, this interface will be fired.
-    override fun onUserItemClicked(position: Int) {
+    override fun onItemClicked(position: Int) {
         mUsersList?.let {
             val bundle = bundleOf(AppConstants.KEY to it[position])
             mView?.findNavController()

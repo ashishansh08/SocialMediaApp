@@ -97,8 +97,31 @@ class ArticleFragment : BaseFragment(), OnListItemClickListener, OnLoadMoreListe
     }
 
     //OnClick of list item, this interface will be fired.
-    override fun onUserItemClicked(position: Int) {
-        //Do nothing
+    override fun onItemClicked(position: Int) {
+        val userToReturn = prepareDataForUserDetails(position)
+        userToReturn?.let {
+            val bundle = bundleOf(AppConstants.KEY to userToReturn)
+            mView?.findNavController()?.navigate(R.id.action_navigation_home_to_navigation_notifications2, bundle)
+        }
+    }
+
+    private fun prepareDataForUserDetails(position: Int): Users? {
+        var userTosend:Users?=null
+        if (mArticleList?.get(position)?.user.isNullOrEmpty().not()){
+            val user = mArticleList?.get(position)?.user
+            userTosend = Users().apply {
+                user?.get(0)?.let {
+                    avatar = it.avatar
+                    name = it.name
+                    lastname=it.lastname
+                    id=it.id
+                    designation=it.designation
+                    city= it.city
+                    about=it.about
+                }
+            }
+        }
+        return userTosend
     }
 
     override fun isInternetChanged() {
@@ -130,7 +153,7 @@ class ArticleFragment : BaseFragment(), OnListItemClickListener, OnLoadMoreListe
     private fun initObserver() {
         mViewModel?.mutableList?.observe(requireActivity(), Observer { it ->
             if (it.isNullOrEmpty().not()) {
-                mArticleList?.let { userList -> mViewModel?.deleteAllAfterId(userList.size!!) }
+                mArticleList?.let { userList -> mViewModel?.deleteAllAfterId(userList.size) }
                 mArticleList?.addAll(it)
                 setArticleAdapter()
                 mArticleList?.let { mViewModel?.insertArticles(mArticleList!!) }

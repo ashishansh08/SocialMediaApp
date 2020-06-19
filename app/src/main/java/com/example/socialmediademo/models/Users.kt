@@ -13,34 +13,34 @@ data class Users (
 
     @PrimaryKey
     @SerializedName("id")
-    val id:Int = 0,
+    var id:Int = 0,
 
     @ColumnInfo(name = "createdAt")
     @SerializedName("createdAt")
-    val createdAt: String? = null,
+    var createdAt: String? = null,
 
     @ColumnInfo(name = "name")
     @SerializedName("name")
-    val name: String? = null,
+    var name: String? = null,
 
     @ColumnInfo(name = "avatar")
     @SerializedName("avatar")
-    val avatar:String? = null,
+    var avatar:String? = null,
 
     @ColumnInfo(name = "lastname")
     @SerializedName("lastname")
-    val lastname: String? = null,
+    var lastname: String? = null,
 
     @ColumnInfo(name ="city")
     @SerializedName("city")
-    val city: String? = null,
+    var city: String? = null,
 
     @ColumnInfo(name ="designation")
     @SerializedName("designation")
-    val designation: String? = null,
+    var designation: String? = null,
 
     @ColumnInfo(name="about")
     @SerializedName("about")
-    val about: String? = null
+    var about: String? = null
 
 ):Parcelable
