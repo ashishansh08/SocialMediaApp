@@ -79,6 +79,7 @@ class ArticleFragment : BaseFragment(), OnListItemClickListener, OnLoadMoreListe
         super.onResume()
         val intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         requireActivity().registerReceiver(mNetworkReceiver, intentFilter)
+        mIsFirstTime=true
     }
     override fun onPause() {
         super.onPause()
