@@ -89,7 +89,6 @@ class ArticleFragment : BaseFragment(), OnListItemClickListener, OnLoadMoreListe
         super.onActivityCreated(savedInstanceState)
     }
 
-
     //This will be called when we scrolled to some position and we want to load the next data.
     override fun onLoadMore(position: Int) {
         if(mArticleList?.size?.rem(AppConstants.LIMIT)==0) {
@@ -134,7 +133,7 @@ class ArticleFragment : BaseFragment(), OnListItemClickListener, OnLoadMoreListe
                 mArticleList?.let { userList -> mViewModel?.deleteAllAfterId(userList.size!!) }
                 mArticleList?.addAll(it)
                 setArticleAdapter()
-                mArticleList?.let { userList -> mViewModel?.insertArticles(mArticleList!!) }
+                mArticleList?.let { mViewModel?.insertArticles(mArticleList!!) }
                 setUI()
             }
         })
@@ -172,6 +171,7 @@ class ArticleFragment : BaseFragment(), OnListItemClickListener, OnLoadMoreListe
         alert.show()
     }
 
+    //Hide and show view accoring to data.
     private fun setUI() {
         if (mArticleList.isNullOrEmpty()){
             mView?.findViewById<TextView>(R.id.textViewArticleNoRecordFound)?.visibility=View.VISIBLE
